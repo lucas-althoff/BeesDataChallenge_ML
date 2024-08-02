@@ -1,11 +1,7 @@
-<img src="https://notas-musicais.readthedocs.io/en/latest/assets/logo.png" width="200">
-
 # Fuel Efficiency Pathfinding Challenge
 
 [![CI](https://github.com/lucas-althoff/docs/actions/workflows/pipeline.yaml/badge.svg)]
 [![PyPI version](https://badge.fury.io/py/notas-musicais.svg)](https://badge.fury.io/py/notas-musicais)
-
-![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
 
 # Installing
 
