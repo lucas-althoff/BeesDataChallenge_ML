@@ -1,4 +1,32 @@
-# Fuel Efficiency Path Challenge
+<img src="https://notas-musicais.readthedocs.io/en/latest/assets/logo.png" width="200">
+
+# Fuel Efficiency Pathfinding Challenge
+
+[![CI](https://github.com/lucas-althoff/docs/actions/workflows/pipeline.yaml/badge.svg)]
+[![PyPI version](https://badge.fury.io/py/notas-musicais.svg)](https://badge.fury.io/py/notas-musicais)
+
+![example workflow](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+
+# Installing
+
+For installing the package you have to execute:
+
+```bash
+pipx install bees-ml-path-challenge-skeleton
+```
+
+or your preferable package management system
+
+```bash
+pip install bees-ml-path-challenge-skeleton
+```
+
+# First steps
+
+
+
+# About
+
 
 ## Overview
 
@@ -84,3 +112,12 @@ We look forward to seeing your innovative solutions to this unique and challengi
    - Correct setup of GitHub Actions for pytest: 3 points
    - Successful building and packaging of the Python package: 3 points
    - Creation of a downloadable GitHub Workflow artifact: 4 points
+
+
+## License
+**MIT**
+
+
+# Author
+
+Lucas S. Althoff [@lucas-althoff](https://github.com/lucas-althoff) <ls.althoff@gmail.com>

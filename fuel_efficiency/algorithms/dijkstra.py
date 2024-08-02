@@ -1,16 +1,22 @@
 import heapq
 import math
-from typing import List, Dict, Tuple
+from typing import Dict, List, Tuple
 
-from fuel_efficency.algorithms.path_finding import PathfindingStrategy
-from fuel_efficency.entities.node import Node
-from fuel_efficency.entities.position import Position
+from fuel_efficiency.algorithms.path_finding import PathfindingStrategy
+from fuel_efficiency.entities.node import Node
+from fuel_efficiency.entities.position import Position
+
 
 class DijkstraStrategy(PathfindingStrategy):
     cardinal_directions = [
-        Position(-1, -1), Position(-1, 0), Position(-1, 1),
-        Position(0, -1), Position(0, 1),
-        Position(1, -1), Position(1, 0), Position(1, 1)
+        Position(-1, -1),
+        Position(-1, 0),
+        Position(-1, 1),
+        Position(0, -1),
+        Position(0, 1),
+        Position(1, -1),
+        Position(1, 0),
+        Position(1, 1),
     ]
 
     @staticmethod
@@ -28,7 +34,9 @@ class DijkstraStrategy(PathfindingStrategy):
         neighbors = []
         for direction in DijkstraStrategy.cardinal_directions:
             new_position = node.position + direction
-            if (0 <= new_position.x < len(grid)) and (0 <= new_position.y < len(grid[0])):
+            if (0 <= new_position.x < len(grid)) and (
+                0 <= new_position.y < len(grid[0])
+            ):
                 neighbor_node = grid[new_position.x][new_position.y]
                 neighbors.append(neighbor_node)
         return neighbors
@@ -45,13 +53,18 @@ class DijkstraStrategy(PathfindingStrategy):
         Returns:
             float: The Euclidean distance between the two nodes.
         """
-        return math.sqrt((node2.position.x - node1.position.x) ** 2 +
-                         (node2.position.y - node1.position.y) ** 2)
+        return math.sqrt(
+            (node2.position.x - node1.position.x) ** 2
+            + (node2.position.y - node1.position.y) ** 2
+        )
 
     @staticmethod
-    def find_path(grid: List[List[Node]], start: Node, end: Node) -> List[Node]:
+    def find_path(
+        grid: List[List[Node]], start: Node, end: Node
+    ) -> List[Node]:
         """
-        Find the shortest path from the start node to the end node using Dijkstra's algorithm.
+        Find the shortest path from the start node to the end node using
+        Dijkstra's algorithm.
 
         Args:
             grid (List[List[Node]]): The grid containing all nodes.
@@ -78,7 +91,12 @@ class DijkstraStrategy(PathfindingStrategy):
                 return path
 
             for neighbor in DijkstraStrategy.get_neighbors(grid, current_node):
-                distance = current_distance + DijkstraStrategy.calculate_distance(current_node, neighbor)
+                distance = (
+                    current_distance
+                    + DijkstraStrategy.calculate_distance(
+                        current_node, neighbor
+                    )
+                )
                 if neighbor not in distances or distance < distances[neighbor]:
                     distances[neighbor] = distance
                     priority_queue.append((distance, neighbor))

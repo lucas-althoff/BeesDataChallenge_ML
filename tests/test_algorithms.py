@@ -1,19 +1,22 @@
 import math
 from typing import List
+from unittest.mock import MagicMock
 
 import pytest
 
-from fuel_efficency.algorithms.a_star import AStarStrategy
-from fuel_efficency.algorithms.context import Context
-from fuel_efficency.algorithms.dijkstra import DijkstraStrategy
-from fuel_efficency.algorithms.path_finding import PathfindingStrategy
-from fuel_efficency.entities.node import Node
-from fuel_efficency.entities.position import Position
-from fuel_efficency.entities.valley import Valley
+from fuel_efficiency.algorithms.a_star import AStarStrategy
+from fuel_efficiency.algorithms.context import Context
+from fuel_efficiency.algorithms.dijkstra import DijkstraStrategy
+from fuel_efficiency.algorithms.path_finding import PathfindingStrategy
+from fuel_efficiency.entities.node import Node
+from fuel_efficiency.entities.position import Position
+from fuel_efficiency.entities.valley import Valley
 
 
 def create_3_by_3_flat_terrain_grid():
-    return [[Valley(position=Position(x, y)) for y in range(3)] for x in range(3)]
+    return [
+        [Valley(position=Position(x, y)) for y in range(3)] for x in range(3)
+    ]
 
 
 test_data = [
@@ -28,48 +31,77 @@ test_data = [
     (Valley(position=Position(2, 2)), 3),  # Bottom right corner
 ]
 
-@pytest.mark.parametrize("start_node, expected_neighbors_count", test_data)
-def test_get_neighbors(start_node:Node, expected_neighbors_count:int):
+
+@pytest.mark.parametrize(('start_node', 'expected_neighbors_count'), test_data)
+def test_get_neighbors(start_node: Node, expected_neighbors_count: int):
     grid = create_3_by_3_flat_terrain_grid()
     grid_width = len(grid)
     grid_height = len(grid[0])
     neighbors = DijkstraStrategy.get_neighbors(grid, start_node)
     assert len(neighbors) == expected_neighbors_count
-    assert all(0 <= neighbor.position.x < grid_width and 0 <= neighbor.position.y < grid_height for neighbor in neighbors)
+    assert all(
+        0 <= neighbor.position.x < grid_width
+        and 0 <= neighbor.position.y < grid_height
+        for neighbor in neighbors
+    )
 
 
 distance_test_data = [
-    (Valley(position=Position(0, 0)), Valley(position=Position(1, 1)), math.sqrt(2)),  # Diagonal distance
-    (Valley(position=Position(0, 0)), Valley(position=Position(0, 1)), 1),  # Vertical distance
-    (Valley(position=Position(0, 0)), Valley(position=Position(1, 0)), 1),  # Horizontal distance
+    (
+        Valley(position=Position(0, 0)),
+        Valley(position=Position(1, 1)),
+        math.sqrt(2),
+    ),  # Diagonal distance
+    (
+        Valley(position=Position(0, 0)),
+        Valley(position=Position(0, 1)),
+        1,
+    ),  # Vertical distance
+    (
+        Valley(position=Position(0, 0)),
+        Valley(position=Position(1, 0)),
+        1,
+    ),  # Horizontal distance
 ]
 
-@pytest.mark.parametrize("node1, node2, expected_distance", distance_test_data)
-def test_calculate_distance(node1: Node, node2: Node, expected_distance: float):
+
+@pytest.mark.parametrize(
+    ('node1', 'node2', 'expected_distance'), distance_test_data
+)
+def test_calculate_distance(
+    node1: Node, node2: Node, expected_distance: float
+):
     calculated_distance = DijkstraStrategy.calculate_distance(node1, node2)
     assert math.isclose(calculated_distance, expected_distance, rel_tol=1e-9)
+
 
 def test_dijkstra_find_path():
     grid = create_3_by_3_flat_terrain_grid()
     start = grid[0][0]  # Top-left corner
     end = grid[2][2]  # Bottom-right corner
 
-    # Expected path: straight line from top-left to bottom-right ommitting the start position as there's no weight
-    expected_path = [
-        grid[x][x] for x in range(1, 3)
-    ]
+    # Expected path: straight line from top-left to bottom-right
+    # ommitting the start position as there's no weight
+    expected_path = [grid[x][x] for x in range(1, 3)]
 
     path = DijkstraStrategy.find_path(grid, start, end)
 
     assert path == expected_path
+
 
 def test_astar_find_path():
     grid = create_3_by_3_flat_terrain_grid()
     start = grid[0][0]  # Top-left corner
     end = grid[2][2]  # Bottom-right corner
 
-    # Expected path: straight line from top-left to bottom-right ommitting the start position as there's no weight
-    positions = [Position(0, 1), Position(0, 2), Position(1, 2), Position(2, 2)]
+    # Expected path: straight line from top-left to bottom-right ommitting
+    # the start position as there's no weight
+    positions = [
+        Position(0, 1),
+        Position(0, 2),
+        Position(1, 2),
+        Position(2, 2),
+    ]
 
     expected_path = [Valley(position=position) for position in positions]
 
@@ -77,22 +109,29 @@ def test_astar_find_path():
 
     assert path == expected_path
 
+
 grid = create_3_by_3_flat_terrain_grid()
 start_node = grid[0][0]  # Top-left corner
 end_node = grid[2][2]  # Bottom-right corner
 
 test_cases = [
     (AStarStrategy(), grid, start_node, end_node),
-    (DijkstraStrategy(), grid, start_node, end_node)
+    (DijkstraStrategy(), grid, start_node, end_node),
 ]
 
-from unittest.mock import MagicMock
 
-
-@pytest.mark.parametrize("strategy, grid, start, end", test_cases)
-def test_context_run(strategy:PathfindingStrategy, grid:List[List[Node]], start:Node, end:Node):
-    strategy.find_path = MagicMock(spec=PathfindingStrategy.find_path)
-    context:Context = Context(_strategy=strategy, _grid=grid, _start=start, _end=end)
+@pytest.mark.parametrize(('strategy', 'grid', 'start', 'end'), test_cases)
+def test_context_run(
+    strategy: PathfindingStrategy,
+    grid: List[List[Node]],
+    start: Node,
+    end: Node,
+):
+    # strategy.find_path = MagicMock(spec=PathfindingStrategy.find_path)
+    strategy.find_path = MagicMock(return_value=[])
+    context: Context = Context(
+        _strategy=strategy, _grid=grid, _start=start, _end=end
+    )
     _ = context.run()
     strategy.find_path.assert_called_once_with(grid, start, end)
     assert context.strategy == strategy
@@ -100,9 +139,11 @@ def test_context_run(strategy:PathfindingStrategy, grid:List[List[Node]], start:
     assert context.start == start
     assert context.end == end
 
+
 def test_grid_setter_invalid_type() -> None:
     """
-    Test that an error is raised when an invalid type is set for the grid attribute.
+    Test that an error is raised when an invalid type
+    is set for the grid attribute.
 
     Args:
         None
@@ -110,16 +151,20 @@ def test_grid_setter_invalid_type() -> None:
     Returns:
         None: This function should not return anything.
     """
-    context = Context(_strategy=AStarStrategy(), _grid=[], _start=Valley(), _end=Valley())
-    invalid_grid = "not a list"
+    context = Context(
+        _strategy=AStarStrategy(), _grid=[], _start=Valley(), _end=Valley()
+    )
+    invalid_grid = 'not a list'
 
     with pytest.raises(TypeError) as excinfo:
         context.grid = invalid_grid
-    assert "Grid must be a list" in str(excinfo.value)
+    assert 'Grid must be a list' in str(excinfo.value)
+
 
 def test_grid_setter_invalid_row_type() -> None:
     """
-    Test that an error is raised when the grid attribute is not a list of lists.
+    Test that an error is raised when the grid attribute
+    is not a list of lists.
 
     Args:
         None
@@ -127,16 +172,20 @@ def test_grid_setter_invalid_row_type() -> None:
     Returns:
         None: This function should not return anything.
     """
-    context = Context(_strategy=AStarStrategy(), _grid=[], _start=Valley(), _end=Valley())
+    context = Context(
+        _strategy=AStarStrategy(), _grid=[], _start=Valley(), _end=Valley()
+    )
     invalid_grid = [10, 20]  # Not a list of lists
 
     with pytest.raises(TypeError) as excinfo:
         context.grid = invalid_grid
-    assert "Grid must be a list of lists" in str(excinfo.value)
+    assert 'Grid must be a list of lists' in str(excinfo.value)
+
 
 def test_strategy_setter_invalid_type() -> None:
     """
-    Test that an error is raised when an invalid type is set for the strategy attribute.
+    Test that an error is raised when an invalid type is
+    set for the strategy attribute.
 
     Args:
         None
@@ -144,16 +193,22 @@ def test_strategy_setter_invalid_type() -> None:
     Returns:
         None: This function should not return anything.
     """
-    context = Context(_strategy=AStarStrategy(), _grid=[], _start=Valley(), _end=Valley())
-    invalid_strategy = "not a PathfindingStrategy object"
+    context = Context(
+        _strategy=AStarStrategy(), _grid=[], _start=Valley(), _end=Valley()
+    )
+    invalid_strategy = 'not a PathfindingStrategy object'
 
     with pytest.raises(TypeError) as excinfo:
         context.strategy = invalid_strategy
-    assert "Strategy must be an instance of PathfindingStrategy" in str(excinfo.value)
+    assert 'Strategy must be an instance of PathfindingStrategy' in str(
+        excinfo.value
+    )
+
 
 def test_run_method_missing_find_path() -> None:
     """
-    Test that an error is raised when the strategy does not implement the find_path method.
+    Test that an error is raised when the strategy does not
+    implement the find_path method.
 
     Args:
         None
@@ -161,11 +216,13 @@ def test_run_method_missing_find_path() -> None:
     Returns:
         None: This function should not return anything.
     """
-    context = Context(_strategy=object(), _grid=[], _start=Valley(), _end=Valley())
+    context = Context(
+        _strategy=object(), _grid=[], _start=Valley(), _end=Valley()
+    )
 
     with pytest.raises(NotImplementedError) as excinfo:
         context.run()
-    assert "Strategy must implement the find_path method" in str(excinfo.value)
+    assert 'Strategy must implement the find_path method' in str(excinfo.value)
 
 
 def test_context_run_success():
@@ -180,29 +237,65 @@ def test_context_run_success():
     """
 
     class MockPathfindingStrategy(PathfindingStrategy):
-        def find_path(self, grid, start:Node, end:Node):
+        @staticmethod
+        def find_path(grid: List[List[Node]], start: Node, end: Node):
             # Implement a simple path finding logic for testing,
             # or return a predefined path
-            return [Valley(position=Position(x, y)) for x in range(start.position.x, end.position.x + 1) for y in range(start.position.y, end.position.y + 1)]
-        def calculate_distance(self, node1, node2):
-            pass
-        def get_neighbors(self, grid, node):
-            pass
+            return [
+                Valley(position=Position(x, y))
+                for x in range(start.position.x, end.position.x + 1)
+                for y in range(start.position.y, end.position.y + 1)
+            ]
+
+        @staticmethod
+        def calculate_distance(node1: Node, node2: Node) -> float:
+            """
+            Mock implementation of calculate_distance for testing.
+
+            Args:
+                node1 (Node): The first node.
+                node2 (Node): The second node.
+
+            Returns:
+                float: The mock distance between the nodes.
+                Returns a constant value, as the actual distance
+                calculation isn't relevant for this mock test.
+            """
+            return 1.0
+
+        @staticmethod
+        def get_neighbors(grid: List[List[Node]], node: Node) -> List[Node]:
+            """
+            Mock implementation of get_neighbors for testing.
+
+            Args:
+                grid (list): The grid representing the terrain.
+                node (Node): The node for which neighbors are to be found.
+
+            Returns:
+                list: A list of neighboring Nodes.
+                Returns a list containing the same node,
+                simplifying the neighbor finding logic.
+            """
+            return [node]
 
     grid = [[Valley() for _ in range(3)] for _ in range(3)]
     start = Valley(position=Position(0, 0))  # Top-left corner
-    end = Valley(position=Position(2, 2))    # Bottom-right corner
+    end = Valley(position=Position(2, 2))  # Bottom-right corner
     strategy = MockPathfindingStrategy()
 
-    context:Context = Context()
+    context: Context = Context()
     context.grid = grid
     context.start = start
     context.end = end
     context.strategy = strategy
 
-    # Define expected path based on the MockPathfindingStrategy's logic
-    expected_path = [Valley(position=Position(x, y)) for x in range(start.position.x, end.position.x + 1) for y in range(start.position.y, end.position.y + 1)]
+    expected_path = [
+        Valley(position=Position(x, y))
+        for x in range(start.position.x, end.position.x + 1)
+        for y in range(start.position.y, end.position.y + 1)
+    ]
 
     path = context.run()
 
-    assert path == expected_path, "The path should match the expected path"
+    assert path == expected_path, 'The path should match the expected path'
