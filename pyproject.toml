@@ -5,7 +5,6 @@ description = "Fuel Efficiency Pathfinding System Challenge"
 authors = ["Lucas S. Althoff"]
 readme = "README.md"
 packages = [{include = "fuel_efficiency"}]
-requires-python = ">=3.10.4"
 classifiers = [
     "Topic :: Scientific/Engineering",
     "Programming Language :: Python :: 3.10",
