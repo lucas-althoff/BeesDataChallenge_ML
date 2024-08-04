@@ -1,6 +1,6 @@
 # Fuel Efficiency Pathfinding Challenge
 
-[![CI](https://github.com/lucas-althoff/docs/actions/workflows/pipeline.yaml/badge.svg)]
+![CI](https://github.com/lucas-althoff/BeesDataChallenge_ML/actions/workflows/pipeline.yml/badge.svg)
 ![PyPI version](https://img.shields.io/pypi/v/pathfinding_challenge?label=pypi%20package)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/pathfinding_challenge)
 
@@ -18,12 +18,26 @@ or your preferable package management system
 pip install bees-ml-path-challenge-skeleton
 ```
 
-# First steps
+# Test coverage
 
-
+The coverage is on 99%, the complete report can be found at: `bees_ml_path_challenge-skeleton/htmlcov/index.html`
 
 # About
 
+Our solution focus on solving path finding with a path cost based on two attributes, the distance between two coordinates and
+the terrain fuel consumption. 
+
+Two path finding algorithms can be applied to solve a grid specific:
+
+- A*
+- Djikstra
+
+## Execution
+
+You can execute a test with a random grid running:
+```bash
+$python example.py
+```
 
 ## Overview
 

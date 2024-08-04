@@ -150,7 +150,6 @@ def test_context_run(
     start: Node,
     end: Node,
 ):
-    # strategy.find_path = MagicMock(spec=PathfindingStrategy.find_path)
     strategy.find_path = MagicMock(return_value=[])
     context: Context = Context(
         _strategy=strategy, _grid=grid, _start=start, _end=end
