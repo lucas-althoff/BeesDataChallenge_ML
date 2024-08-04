@@ -3,7 +3,7 @@
 [![CI](https://github.com/lucas-althoff/BeesDataChallenge_ML/actions/workflows/pipeline.yml/badge.svg)](https://github.com/lucas-althoff/BeesDataChallenge_ML/actions/workflows/pipeline.yml/)
 [![PyPI version](https://img.shields.io/pypi/v/pathfinding_challenge?label=pypi%20package)](https://pypi.org/project/pathfinding_challenge)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/pathfinding_challenge)](https://pypi.org/project/pathfinding_challenge/#history)
-[![Coverage](https://github.com/lucas-althoff/BeesDataChallenge_ML/tree/master/htmlcov/coverage.svg)](https://github.com/lucas-althoff/BeesDataChallenge_ML/tree/master/htmlcov/coverage.png)
+[![Coverage](https://raw.githubusercontent.com/lucas-althoff/BeesDataChallenge_ML/8a600b49e653e2d1676afaafa695112578a5e93d/htmlcov/coverage.svg?token=ALBPDBYLLWZYZN3AZWI7LXDGV4C3K)](https://github.com/lucas-althoff/BeesDataChallenge_ML/tree/master/htmlcov/coverage.png)
 
 
 # Installing
