@@ -57,12 +57,23 @@ class AStarStrategy(PathfindingStrategy):
     @staticmethod
     def calculate_distance(node1: Node, node2: Node) -> float:
         """
-        Calculate the distance between two nodes.
-        Uses Euclidean distance for accurate path cost.
+        Calculate the path cost between two nodes.
+        Uses Euclidean distance plus terrain fuel efficiency
+        for accurate path cost.
+
+        Args:
+            node1 (Node): The first node.
+            node2 (Node): The second node.
+
+        Returns:
+            float: The path cost between the two nodes.
         """
-        return math.sqrt(
-            (node2.position.x - node1.position.x) ** 2
-            + (node2.position.y - node1.position.y) ** 2
+        return (
+            math.sqrt(
+                (node2.position.x - node1.position.x) ** 2
+                + (node2.position.y - node1.position.y) ** 2
+            )
+            + node2.weight
         )
 
     @staticmethod
@@ -91,7 +102,6 @@ class AStarStrategy(PathfindingStrategy):
         }
 
         while open_set:
-            # current_f_score, current = heapq.heappop(open_set)
             _, current = heapq.heappop(open_set)
 
             if current == end:

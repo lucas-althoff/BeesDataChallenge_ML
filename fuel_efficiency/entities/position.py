@@ -3,13 +3,6 @@ from dataclasses import dataclass
 from typing import Optional
 
 
-class PositionError(Exception):
-    """Exception raised for errors in the Position operations."""
-
-    def __init__(self, message: str):
-        super().__init__(message)
-
-
 @dataclass(slots=True)
 class Position:
     x: int = sys.maxsize
@@ -25,17 +18,11 @@ class Position:
         Returns:
             Position: The sum of the two Position objects.
         """
-        try:
-            if not isinstance(other, Position):
-                raise NotImplementedError(
-                    f'Cannot add Position and {type(other)}'
-                )
-            new_x = self.x + other.x
-            new_y = self.y + other.y
-            return Position(new_x, new_y)
-        except (OverflowError, PositionError) as e:
-            print(f'Error in __add__: {e}')
-            return None
+        if not isinstance(other, Position):
+            raise NotImplementedError(f'Cannot add Position and {type(other)}')
+        new_x = self.x + other.x
+        new_y = self.y + other.y
+        return Position(new_x, new_y)
 
     def __sub__(self, other: 'Position') -> Optional['Position']:
         """
@@ -48,14 +35,10 @@ class Position:
         Returns:
             Position: The difference of the two Position objects.
         """
-        try:
-            if not isinstance(other, Position):
-                raise NotImplementedError(
-                    f'Cannot subtract Position and {type(other)}'
-                )
-            new_x = self.x - other.x
-            new_y = self.y - other.y
-            return Position(new_x, new_y)
-        except (OverflowError, PositionError) as e:
-            print(f'Error in __sub__: {e}')
-            return None
+        if not isinstance(other, Position):
+            raise NotImplementedError(
+                f'Cannot subtract Position and {type(other)}'
+            )
+        new_x = self.x - other.x
+        new_y = self.y - other.y
+        return Position(new_x, new_y)

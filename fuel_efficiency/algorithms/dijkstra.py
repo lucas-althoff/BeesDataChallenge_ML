@@ -44,18 +44,23 @@ class DijkstraStrategy(PathfindingStrategy):
     @staticmethod
     def calculate_distance(node1: Node, node2: Node) -> float:
         """
-        Calculate the Euclidean distance between two nodes.
+        Calculate the path cost between two nodes.
+        Uses Euclidean distance plus terrain fuel efficiency
+        for accurate path cost.
 
         Args:
             node1 (Node): The first node.
             node2 (Node): The second node.
 
         Returns:
-            float: The Euclidean distance between the two nodes.
+            float: The path cost between the two nodes.
         """
-        return math.sqrt(
-            (node2.position.x - node1.position.x) ** 2
-            + (node2.position.y - node1.position.y) ** 2
+        return (
+            math.sqrt(
+                (node2.position.x - node1.position.x) ** 2
+                + (node2.position.y - node1.position.y) ** 2
+            )
+            + node2.weight
         )
 
     @staticmethod

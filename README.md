@@ -1,7 +1,8 @@
 # Fuel Efficiency Pathfinding Challenge
 
 [![CI](https://github.com/lucas-althoff/docs/actions/workflows/pipeline.yaml/badge.svg)]
-[![PyPI version](https://badge.fury.io/py/notas-musicais.svg)](https://badge.fury.io/py/notas-musicais)
+![PyPI version](https://img.shields.io/pypi/v/pathfinding_challenge?label=pypi%20package)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/pathfinding_challenge)
 
 # Installing
 

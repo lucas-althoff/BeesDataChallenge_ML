@@ -222,42 +222,6 @@ def test_position_sub_invalid_type() -> None:
     assert f'Cannot subtract Position and {type(other)}' in str(excinfo.value)
 
 
-# @pytest.mark.parametrize('node', [Valley, UpHill, DownHill, Plateau])
-# def test_eq_(node: Node):
-#     node_instance = node()
-#     other = int()
-
-#     with pytest.raises(NotImplementedError) as excinfo:
-#         node_instance == other
-#     assert 'Missing `position` or `weight` attribute' in str(excinfo.value)
-
-
-# @pytest.mark.parametrize('node', [Valley, UpHill, DownHill, Plateau])
-# def test_lt_(node: Node):
-#     valley = node()
-#     other = int()
-
-#     with pytest.raises(NotImplementedError) as excinfo:
-#         valley < other
-#     assert 'Missing `weight` attribute' in str(excinfo.value)
-
-
-# @pytest.mark.parametrize('node', [Valley, UpHill, DownHill, Plateau])
-# def test_gt_(node: Node):
-#     valley = node()
-#     other = int()
-
-#     with pytest.raises(NotImplementedError) as excinfo:
-#         valley > other
-#     assert 'Missing `weight` attribute' in str(excinfo.value)
-
-
-# @pytest.mark.parametrize('node', [Valley, UpHill, DownHill, Plateau])
-# def test_ne_(node: Node):
-#     valley = node()
-#     other = node()
-
-
 def test_node_comparisons():
     TEST_NUMBER = 10
     node1 = TestNode(weight=1.0, position=Position(x=0, y=0))
@@ -274,3 +238,36 @@ def test_node_comparisons():
 
     with pytest.raises(TypeError):
         _ = node1 > TEST_NUMBER
+
+
+def test_comparisons():
+    node1 = Valley(position=Position(x=0, y=0))
+    node2 = UpHill(position=Position(x=1, y=1))
+    node3 = DownHill(position=Position(x=0, y=0))
+    node4 = Plateau(position=Position(x=0, y=0))
+
+    node5 = DownHill(position=Position(x=0, y=0))
+    node6 = UpHill(position=Position(x=1, y=1))
+    node7 = UpHill(weight=3, position=Position(x=1, y=1))
+    node8 = DownHill(weight=0.1, position=Position(x=1, y=1))
+
+    assert node3 < node1
+    assert node3 < node2
+    assert node3 != node2
+    assert node3 == node5
+    assert node3 > node8
+
+    assert node4 < node2
+    assert node4 == node1
+    assert node4 > node3
+    assert node4 != node2
+
+    assert node1 < node2
+    assert node1 > node3
+    assert node1 == node4
+    assert node1 != node2
+
+    assert node2 > node1
+    assert node2 == node6
+    assert node2 != node1
+    assert node7 > node6

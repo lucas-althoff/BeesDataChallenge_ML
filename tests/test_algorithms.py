@@ -8,8 +8,11 @@ from fuel_efficiency.algorithms.a_star import AStarStrategy
 from fuel_efficiency.algorithms.context import Context
 from fuel_efficiency.algorithms.dijkstra import DijkstraStrategy
 from fuel_efficiency.algorithms.path_finding import PathfindingStrategy
+from fuel_efficiency.entities.down_hill import DownHill
 from fuel_efficiency.entities.node import Node
+from fuel_efficiency.entities.plateau import Plateau
 from fuel_efficiency.entities.position import Position
+from fuel_efficiency.entities.up_hill import UpHill
 from fuel_efficiency.entities.valley import Valley
 
 
@@ -50,18 +53,38 @@ distance_test_data = [
     (
         Valley(position=Position(0, 0)),
         Valley(position=Position(1, 1)),
-        math.sqrt(2),
-    ),  # Diagonal distance
+        math.sqrt(2) + 1,
+    ),  # Diagonal distance with uniform fuel consumption
     (
         Valley(position=Position(0, 0)),
         Valley(position=Position(0, 1)),
-        1,
-    ),  # Vertical distance
+        1 + 1,
+    ),  # Vertical distance with uniform fuel consumption
     (
         Valley(position=Position(0, 0)),
         Valley(position=Position(1, 0)),
-        1,
-    ),  # Horizontal distance
+        1 + 1,
+    ),  # Horizontal distance with uniform fuel consumption
+    (
+        Plateau(position=Position(0, 0)),
+        UpHill(position=Position(1, 0)),
+        1 + 2,
+    ),  # Horizontal distance with increasing fuel consumption
+    (
+        Valley(position=Position(0, 0)),
+        UpHill(position=Position(1, 0)),
+        1 + 2,
+    ),  # Horizontal distance with increasing fuel consumption
+    (
+        Plateau(position=Position(0, 0)),
+        DownHill(position=Position(1, 0)),
+        1 + 0.5,
+    ),  # Horizontal distance with decreasing fuel consumption
+    (
+        Valley(position=Position(0, 0)),
+        DownHill(position=Position(1, 0)),
+        1 + 0.5,
+    ),  # Horizontal distance with decreasing fuel consumption
 ]
 
 

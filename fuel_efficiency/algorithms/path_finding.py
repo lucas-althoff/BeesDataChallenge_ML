@@ -51,7 +51,8 @@ class PathfindingStrategy(ABC):
     @abstractmethod
     def calculate_distance(self, node1: Node, node2: Node) -> float:
         """
-        Calculate the distance between two nodes.
+        Calculate the cost distance between two nodes,
+        considering the Node's terrain.
 
         Args:
             node1 (Node): The first node.
