@@ -3,6 +3,7 @@ from typing import List
 from unittest.mock import MagicMock
 
 import pytest
+
 from pathfinding_challenge.algorithms.a_star import AStarStrategy
 from pathfinding_challenge.algorithms.context import Context
 from pathfinding_challenge.algorithms.dijkstra import DijkstraStrategy

@@ -1,4 +1,5 @@
 import pytest
+
 from pathfinding_challenge import InvalidComparisonError, MissingAttrError
 from pathfinding_challenge.algorithms.context import Context
 from pathfinding_challenge.entities.down_hill import DownHill

@@ -3,6 +3,7 @@ from dataclasses import dataclass, field
 from typing import TypeVar
 
 import pytest
+
 from pathfinding_challenge.entities.down_hill import DownHill
 from pathfinding_challenge.entities.node import Node
 from pathfinding_challenge.entities.plateau import Plateau
