@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import List
 
-from fuel_efficiency.algorithms.dijkstra import DijkstraStrategy
-from fuel_efficiency.algorithms.path_finding import PathfindingStrategy
-from fuel_efficiency.entities.down_hill import DownHill
-from fuel_efficiency.entities.node import Node
-from fuel_efficiency.entities.plateau import Plateau
-from fuel_efficiency.entities.up_hill import UpHill
-from fuel_efficiency.entities.valley import Valley
+from pathfinding_challenge.algorithms.dijkstra import DijkstraStrategy
+from pathfinding_challenge.algorithms.path_finding import PathfindingStrategy
+from pathfinding_challenge.entities.down_hill import DownHill
+from pathfinding_challenge.entities.node import Node
+from pathfinding_challenge.entities.plateau import Plateau
+from pathfinding_challenge.entities.up_hill import UpHill
+from pathfinding_challenge.entities.valley import Valley
 
 
 @dataclass(slots=True)

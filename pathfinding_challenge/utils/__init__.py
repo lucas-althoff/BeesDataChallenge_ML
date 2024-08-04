@@ -1,14 +1,12 @@
+import math
 import random
 from typing import List
 
-from fuel_efficiency.algorithms.a_star import AStarStrategy
-from fuel_efficiency.algorithms.context import Context
-from fuel_efficiency.algorithms.dijkstra import DijkstraStrategy
-from fuel_efficiency.entities.down_hill import DownHill
-from fuel_efficiency.entities.plateau import Plateau
-from fuel_efficiency.entities.position import Position
-from fuel_efficiency.entities.up_hill import UpHill
-from fuel_efficiency.entities.valley import Valley
+from pathfinding_challenge.entities.down_hill import DownHill
+from pathfinding_challenge.entities.plateau import Plateau
+from pathfinding_challenge.entities.position import Position
+from pathfinding_challenge.entities.up_hill import UpHill
+from pathfinding_challenge.entities.valley import Valley
 
 
 def generate_terrain(prev_terrain=None):
@@ -36,12 +34,13 @@ def get_random_edge_position(N: int, M: int) -> Position:
         + [(N - 1, y) for y in range(1, M - 1)]
     )
     x, y = random.choice(edge_positions)
-    return Position(x, y)  # pragma: no cover
+    return Position(x, y)
 
 
 def create_grid(N: int, M: int) -> List[List[object]]:
     """
-    Create an NxM grid with random terrain types, adhering to continuity rules.
+    Create an NxM grid with random terrain types, adhering to continuity
+    rules.
 
     Args:
         N (int): Number of rows in the grid.
@@ -61,7 +60,7 @@ def create_grid(N: int, M: int) -> List[List[object]]:
             row.append(terrain_type(position=Position(x, y)))
         grid.append(row)
 
-    return grid  # pragma: no cover
+    return grid
 
 
 def print_grid(grid: List[List[object]]):
@@ -69,38 +68,21 @@ def print_grid(grid: List[List[object]]):
     symbols = {Valley: 'V', UpHill: 'U', DownHill: 'D', Plateau: 'P'}
 
     for row in grid:
-        print(
-            ' '.join(symbols[type(cell)] for cell in row)
-        )  # pragma: no cover
+        print(' '.join(symbols[type(cell)] for cell in row))
 
 
-if __name__ == '__main__':
-    grid = create_grid(10, 10)
-
-    print_grid(grid)
-
-    start_position = get_random_edge_position(10, 10)
-    end_position = get_random_edge_position(10, 10)
-
-    while start_position == end_position:
-        end_position = get_random_edge_position(10, 10)
-
-    start = Valley(position=start_position)
-    end = Valley(position=end_position)
-
-    print('\n=========  START  =========\n', start.position)
-    print('\n=========  END  =========\n', end.position)
-
-    context = Context()
-    context.grid = grid
-    context.start = start
-    context.end = end
-
-    context.strategy = AStarStrategy()
-    path = context.run()
-
-    print('\n=========  A* Solution  =========\n', path)
-
-    context.strategy = DijkstraStrategy()
-    path = context.run()
-    print("\n=========  Djikstra's Solution  =========\n", path)
+def compute_path_cost(path):
+    for i, node in enumerate(path[:-1]):
+        node1 = node
+        node2 = path[i + 1]
+        path_cost = (
+            math.sqrt(
+                (node2.position.x - node1.position.x) ** 2
+                + (node2.position.y - node1.position.y) ** 2
+            )
+            + node2.weight
+        )
+    if path_cost:
+        return path_cost
+    else:
+        return 0

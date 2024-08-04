@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Any
 
-from fuel_efficiency import InvalidComparisonError
-from fuel_efficiency.entities.position import Position
+from pathfinding_challenge import InvalidComparisonError
+from pathfinding_challenge.entities.position import Position
 
 
 @dataclass(slots=True)

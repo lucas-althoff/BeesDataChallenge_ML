@@ -1,8 +1,8 @@
 from dataclasses import dataclass, field
 
-from fuel_efficiency import MissingAttrError
-from fuel_efficiency.entities.node import Node
-from fuel_efficiency.entities.position import Position
+from pathfinding_challenge import MissingAttrError
+from pathfinding_challenge.entities.node import Node
+from pathfinding_challenge.entities.position import Position
 
 
 @dataclass(slots=True)

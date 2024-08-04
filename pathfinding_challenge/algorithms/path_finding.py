@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
 
-from fuel_efficiency.entities.node import Node
+from pathfinding_challenge.entities.node import Node
 
 
 class PathfindingStrategy(ABC):

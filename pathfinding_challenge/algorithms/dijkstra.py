@@ -2,9 +2,9 @@ import heapq
 import math
 from typing import Dict, List, Tuple
 
-from fuel_efficiency.algorithms.path_finding import PathfindingStrategy
-from fuel_efficiency.entities.node import Node
-from fuel_efficiency.entities.position import Position
+from pathfinding_challenge.algorithms.path_finding import PathfindingStrategy
+from pathfinding_challenge.entities.node import Node
+from pathfinding_challenge.entities.position import Position
 
 
 class DijkstraStrategy(PathfindingStrategy):

@@ -1,16 +1,26 @@
 from dataclasses import dataclass, field
 
-from fuel_efficiency import MissingAttrError
-from fuel_efficiency.entities.node import Node
-from fuel_efficiency.entities.position import Position
+from pathfinding_challenge import MissingAttrError
+from pathfinding_challenge.entities.node import Node
+from pathfinding_challenge.entities.position import Position
 
 
 @dataclass(slots=True)
-class Plateau(Node):
-    weight: float = float(1)
+class DownHill(Node):
+    """
+    Represents a DownHill terrain node in the grid.
+
+    Attributes:
+        weight (float): The weight or difficulty of traversing this terrain.
+                        Defaults to 0.5.
+        position (Position): The position of this node in the grid.
+                             Defaults to a new Position instance.
+    """
+
+    weight: float = float(0.5)
     position: Position = field(default_factory=Position)
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         """
         Return a hash value for the object.
 
@@ -21,17 +31,17 @@ class Plateau(Node):
 
     def __eq__(self, other):
         """
-        Determine the equality between Plateau and other objects.
+        Determine the equality between DownHill and other objects.
 
         Args:
-            other: The other Plateau object to compare with.
+            other: The other DownHill object to compare with.
 
         Returns:
             bool: True if both objects have the same position, False otherwise.
 
         Raises:
             MissingAttrError: If the 'position' or 'weight' attribute is
-                                    missing in either object.
+                                 missing in either object.
         """
         if (
             not hasattr(self, 'weight')
@@ -44,10 +54,10 @@ class Plateau(Node):
 
     def __lt__(self, other) -> bool:
         """
-        Compare a Plateau node and other node by their weight.
+        Compare a DownHill node and other node by their weight.
 
         Args:
-            other: The other Plateau object to compare with.
+            other: The other DownHill object to compare with.
 
         Returns:
             bool: True if the current object's weight is less than the other's,
@@ -63,14 +73,14 @@ class Plateau(Node):
 
     def __gt__(self, other) -> bool:
         """
-        Compare a Plateau node and other node by their weight.
+        Compare a DownHill node and other node by their weight.
 
         Args:
-            other: The other Plateau object to compare with.
+            other: The other DownHill object to compare with.
 
         Returns:
-            bool: True if the current object's weight is greater than
-                the other's, False otherwise.
+            bool: True if the current object's weight is less than the other's,
+                  False otherwise.
 
         Raises:
             MissingAttrError: If the 'weight' attribute is missing in
@@ -82,14 +92,14 @@ class Plateau(Node):
 
     def __ne__(self, other) -> bool:
         """
-        Compare a Plateau node and other node by their weight.
+        Compare a DownHill node and other node by their weight.
 
         Args:
-            other: The other Plateau object to compare with.
+            other: The other DownHill object to compare with.
 
         Returns:
-            bool: True if the current object's weight is not equal
-                to the other's, False otherwise.
+            bool: True if the current object's weight is less than the other's,
+                  False otherwise.
 
         Raises:
             MissingAttrError: If the 'weight' attribute is missing in

@@ -4,7 +4,7 @@ version = "1.0.0"
 description = "Fuel Efficiency Pathfinding System Challenge"
 authors = ["Lucas S. Althoff"]
 readme = "README.md"
-packages = [{include = "fuel_efficiency"}]
+packages = [{include = "pathfinding_challenge"}]
 classifiers = [
     "Topic :: Scientific/Engineering",
     "Programming Language :: Python :: 3.10",
@@ -45,7 +45,7 @@ addopts = '-p no:warnings'
 
 [tool.taskipy.tasks]
 pre_test = 'task lint'
-test = 'pytest -s -x --cov=fuel_efficiency -vv'
+test = 'pytest -s -x --cov=pathfinding_challenge -vv'
 post_test = 'coverage html'
 lint = 'ruff check . ; ruff check . --diff'
 format = 'ruff check . --fix ; ruff format .'

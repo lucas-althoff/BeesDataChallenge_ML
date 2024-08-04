@@ -3,13 +3,12 @@ from dataclasses import dataclass, field
 from typing import TypeVar
 
 import pytest
-
-from fuel_efficiency.entities.down_hill import DownHill
-from fuel_efficiency.entities.node import Node
-from fuel_efficiency.entities.plateau import Plateau
-from fuel_efficiency.entities.position import Position
-from fuel_efficiency.entities.up_hill import UpHill
-from fuel_efficiency.entities.valley import Valley
+from pathfinding_challenge.entities.down_hill import DownHill
+from pathfinding_challenge.entities.node import Node
+from pathfinding_challenge.entities.plateau import Plateau
+from pathfinding_challenge.entities.position import Position
+from pathfinding_challenge.entities.up_hill import UpHill
+from pathfinding_challenge.entities.valley import Valley
 
 
 @dataclass(slots=True)

@@ -1,31 +1,39 @@
 # Fuel Efficiency Pathfinding Challenge
 
-![CI](https://github.com/lucas-althoff/BeesDataChallenge_ML/actions/workflows/pipeline.yml/badge.svg)
-![PyPI version](https://img.shields.io/pypi/v/pathfinding_challenge?label=pypi%20package)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/pathfinding_challenge)
+[![CI](https://github.com/lucas-althoff/BeesDataChallenge_ML/actions/workflows/pipeline.yml/badge.svg)](https://github.com/lucas-althoff/BeesDataChallenge_ML/actions/workflows/pipeline.yml/)
+[![PyPI version](https://img.shields.io/pypi/v/pathfinding_challenge?label=pypi%20package)](https://pypi.org/project/pathfinding_challenge)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/pathfinding_challenge)](https://pypi.org/project/pathfinding_challenge/#history)
+[![Coverage](https://github.com/lucas-althoff/BeesDataChallenge_ML/tree/master/htmlcov/coverage.svg)](https://github.com/lucas-althoff/BeesDataChallenge_ML/tree/master/htmlcov/coverage.png)
+
 
 # Installing
 
 For installing the package you have to execute:
 
 ```bash
-pipx install bees-ml-path-challenge-skeleton
+pipx install pathfing_challenge
 ```
 
 or your preferable package management system
 
 ```bash
-pip install bees-ml-path-challenge-skeleton
+pip install pathfing_challenge
 ```
 
 # Test coverage
 
-The coverage is on 99%, the complete report can be found at: `bees_ml_path_challenge-skeleton/htmlcov/index.html`
+The coverage is on 99%, the complete html report can be found at: 
+[coverage report](https://github.com/lucas-althoff/BeesDataChallenge_ML/tree/master/htmlcov/index.html)
 
 # About
 
 Our solution focus on solving path finding with a path cost based on two attributes, the distance between two coordinates and
-the terrain fuel consumption. 
+the terrain fuel consumption.
+
+The package has two libraries:
+
+- algorithms
+- entities
 
 Two path finding algorithms can be applied to solve a grid specific:
 
@@ -34,9 +42,12 @@ Two path finding algorithms can be applied to solve a grid specific:
 
 ## Execution
 
-You can execute a test with a random grid running:
-```bash
-$python example.py
+You can execute a random grid example running:
+```python
+from pathfinding_challenge.algorithms.example import PFC
+
+pf = PFC()
+pf.run_example()
 ```
 
 ## License

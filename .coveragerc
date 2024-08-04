@@ -3,3 +3,4 @@ omit =
     */__init__.py
     */setup.py
     */tests/**
+    pathfinding_challenge/algorithms/example.py 

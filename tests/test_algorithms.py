@@ -3,17 +3,16 @@ from typing import List
 from unittest.mock import MagicMock
 
 import pytest
-
-from fuel_efficiency.algorithms.a_star import AStarStrategy
-from fuel_efficiency.algorithms.context import Context
-from fuel_efficiency.algorithms.dijkstra import DijkstraStrategy
-from fuel_efficiency.algorithms.path_finding import PathfindingStrategy
-from fuel_efficiency.entities.down_hill import DownHill
-from fuel_efficiency.entities.node import Node
-from fuel_efficiency.entities.plateau import Plateau
-from fuel_efficiency.entities.position import Position
-from fuel_efficiency.entities.up_hill import UpHill
-from fuel_efficiency.entities.valley import Valley
+from pathfinding_challenge.algorithms.a_star import AStarStrategy
+from pathfinding_challenge.algorithms.context import Context
+from pathfinding_challenge.algorithms.dijkstra import DijkstraStrategy
+from pathfinding_challenge.algorithms.path_finding import PathfindingStrategy
+from pathfinding_challenge.entities.down_hill import DownHill
+from pathfinding_challenge.entities.node import Node
+from pathfinding_challenge.entities.plateau import Plateau
+from pathfinding_challenge.entities.position import Position
+from pathfinding_challenge.entities.up_hill import UpHill
+from pathfinding_challenge.entities.valley import Valley
 
 
 def create_3_by_3_flat_terrain_grid():
