@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pathfinding_challenge"
-version = "0.2.0"
+version = "1.0.0"
 description = "Fuel Efficiency Pathfinding System Challenge"
 authors = ["Lucas S. Althoff"]
 readme = "README.md"

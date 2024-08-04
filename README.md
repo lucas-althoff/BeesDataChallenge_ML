@@ -39,6 +39,16 @@ You can execute a test with a random grid running:
 $python example.py
 ```
 
+## License
+**MIT**
+
+
+## Author
+
+Lucas S. Althoff [@lucas-althoff](https://github.com/lucas-althoff) <ls.althoff@gmail.com>
+
+---
+
 ## Overview
 
 Welcome to the Fuel Efficiency Path Challenge! In this coding exercise, you are tasked with implementing a series of entities and algorithms to map the most fuel-efficient path through various terrains. This challenge is designed to assess your skills in algorithm implementation, object-oriented programming, and problem-solving.
@@ -123,12 +133,3 @@ We look forward to seeing your innovative solutions to this unique and challengi
    - Correct setup of GitHub Actions for pytest: 3 points
    - Successful building and packaging of the Python package: 3 points
    - Creation of a downloadable GitHub Workflow artifact: 4 points
-
-
-## License
-**MIT**
-
-
-# Author
-
-Lucas S. Althoff [@lucas-althoff](https://github.com/lucas-althoff) <ls.althoff@gmail.com>
