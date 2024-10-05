@@ -104,7 +104,7 @@ class AStarStrategy(PathfindingStrategy):
         while open_set:
             _, current = heapq.heappop(open_set)
 
-            if current == end:
+            if current == end:  # Edge case: reach the end
                 path = []
                 while current in came_from:
                     path.append(current)
